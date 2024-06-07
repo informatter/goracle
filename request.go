@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	//"github.com/fatih/color"
 )
 
 type ResponseBody struct {
@@ -23,18 +24,18 @@ type ResponseBody struct {
     EvalDuration       int64     `json:"eval_duration"`
 }
 
-
+var responseChan = make(chan string,2)
 const endpointUrl string =  "http://localhost:3000/api/generate"
 
 
 // Sends an HTTP request to an LLM endpoint.
 func request(model string, systemPrompt string, userPrompt string ) string{
-
 	jsonData := fmt.Sprintf(`{"model":"%s", "system":"%s", "prompt":"%s", "stream":false}`, model, systemPrompt,userPrompt)
 
     // Create a new request using http
     req, err := http.NewRequest("POST", endpointUrl, bytes.NewBuffer([]byte(jsonData)))
     if err != nil {
+
         fmt.Println("Error creating request:", err)
         return ""
     }
