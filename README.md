@@ -5,6 +5,9 @@ Goracle is an interactive CLI application that uses **local** LLMs which lets yo
 <img src="https://github.com/informatter/goracle/blob/master/assets/goracle.jpg" width="500">
 
 
+![](https://github.com/informatter/goracle/blob/master/assets/goracle.gif)
+
+
 
 ## Run
 
