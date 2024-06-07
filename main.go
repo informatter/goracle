@@ -45,8 +45,6 @@ func loading(responseChan chan string) {
 func main() {
 
 	reader := bufio.NewReader(os.Stdin)
-	//processUserInput("exec clear",reader)
-
 	fmt.Print("\n\nWelcome to goracle 🔮 !\n\nInteract in natural language with your shell and goracle  will respond with the appropiate shell command\n\n")
 	fmt.Print("For example if you type:\n\n'Display all the contents of my current directory', goracle  should respond:\n\nls\n\n")
 	fmt.Print("To execute any command simply append exec at the beginning:\n\n")
@@ -79,7 +77,8 @@ func executeCommand(command []string) {
 
 func executeBashCommand(command string) {
 	color.Set(color.FgYellow)
-	cmd := exec.Command("sh", "-c", command)
+	//sh
+	cmd := exec.Command("bash", "-c", command)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	err := cmd.Run()
@@ -91,12 +90,13 @@ func executeBashCommand(command string) {
 func processUserInput(commandStr string, reader *bufio.Reader) {
 
 	commandStr = strings.TrimSpace(commandStr)
+	arrayCommand := strings.Fields(commandStr)
 
 	if commandStr == "exit" {
 		os.Exit(0)
-	} else if strings.Contains(commandStr, "exec") {
+	} else if arrayCommand[0] == "exec"{
 
-		arrCommandStr := strings.Fields(commandStr)[1:] // removes exec
+		arrCommandStr := arrayCommand[1:] // removes exec
 
 		command := strings.Join(arrCommandStr, " ")
 		executeBashCommand(command)
@@ -109,9 +109,6 @@ func processUserInput(commandStr string, reader *bufio.Reader) {
 		color.Set(color.BgBlack)
 		fmt.Print(response)
 		fmt.Print("\n")
-		// goracleWhite := color.New(color.FgHiWhite)
-		// goracleWhiteBold := goracleWhite.Add(color.Bold)
-		// goracleWhiteBold.Print("goracle 🔮 > execute? [y/n] ")
 		displayGoracleSigntature(executePrompt)
 
 		for {
