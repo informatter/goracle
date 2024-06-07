@@ -2,7 +2,7 @@
 
 Goracle is an interactive CLI application that uses **local** LLMs which lets you interact with your shell in natural language and goracle will output the corresponding command.
 
-![](https://github.com/informatter/goracle/blob/master/assets/goracle.jpg)
+![](https://github.com/informatter/goracle/blob/master/assets/goracle.jpg =250x250)
 
 
 
